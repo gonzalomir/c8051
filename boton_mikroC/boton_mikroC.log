@@ -1,0 +1,12 @@
+0	1	mikroc8051.exe -MSF -DBG -pAT89C52 -EC -DL -O11111114 -fo20 -N"G:\icei\c8051\boton_mikroC\boton_mikroC.mcp51" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for 8051\defs\" -SP"G:\icei\c8051\boton_mikroC\" -SP"C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for 8051\Uses\ATMEL\" "boton_mikroC.c" "__Lib_Math.mcl" "__Lib_MathDouble.mcl" "__Lib_System.mcl" "__Lib_Delays.mcl" "__Lib_UART_Timer1.mcl" "__Lib_CType.mcl" "__Lib_CString.mcl" "__Lib_CStdlib.mcl" "__Lib_CMath.mcl" "__Lib_Conversions.mcl" "__Lib_Sprintf.mcl" "__Lib_PrintOut.mcl" "__Lib_Sprinti.mcl" "__Lib_Sprintl.mcl" "__Lib_Time.mcl" "__Lib_Trigonometry.mcl" "__Lib_Button.mcl" "__Lib_Keypad4x4.mcl" "__Lib_Manchester.mcl" "__Lib_OneWire.mcl" "__Lib_PS2.mcl" "__Lib_Sound.mcl" "__Lib_SoftI2C.mcl" "__Lib_SoftSPI.mcl" "__Lib_SoftUART.mcl" "__Lib_GlcdFonts.mcl" "__Lib_Glcd.mcl" "__Lib_LcdConsts.mcl" "__Lib_Lcd.mcl" "__Lib_RS485.mcl" "__Lib_T6963C.mcl"	 
+diagnostics: 0	122	Compilation Started	boton_mikroC.c
+diagnostics: 16	123	Compiled Successfully	boton_mikroC.c
+diagnostics: 0	127	All files Compiled in 94 ms	 
+hint: 0	1144	Used BDATA RAM (bytes): 0 (1%) Free BDATA RAM (bytes): 16 (99%)	Used BDATA RAM (bytes): 0 (1%) Free BDATA RAM (bytes): 16 (99%)
+hint: 0	1144	Used DATA RAM (bytes): 0 (1%) Free DATA RAM (bytes): 104 (99%)	Used DATA RAM (bytes): 0 (1%) Free DATA RAM (bytes): 104 (99%)
+hint: 0	1144	Used IDATA RAM (bytes): 0 (1%) Free IDATA RAM (bytes): 128 (99%)	Used IDATA RAM (bytes): 0 (1%) Free IDATA RAM (bytes): 128 (99%)
+hint: 0	1144	Used ROM (bytes): 80 (1%)  Free ROM (bytes): 8112 (99%)	Used ROM (bytes): 80 (1%)  Free ROM (bytes): 8112 (99%)
+diagnostics: 0	125	Project Linked Successfully	boton_mikroC.mcp51
+diagnostics: 0	128	Linked in 62 ms	 
+diagnostics: 0	129	Project 'boton_mikroC.mcp51' completed: 218 ms	 
+diagnostics: 0	103	Finished successfully: 27 may 2014, 12:52:00	boton_mikroC.mcp51
