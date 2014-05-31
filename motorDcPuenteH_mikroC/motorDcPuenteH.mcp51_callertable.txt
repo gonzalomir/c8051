@@ -1,0 +1,4 @@
+main
+	motorAdelante
+	motorAtras
+	motorDetener
