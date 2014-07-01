@@ -32,9 +32,9 @@ Count=0
 Count=0
 [SEARCH_PATH]
 Count=5
-Path0=C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for 8051\defs\
+Path0=C:\Archivos de programa\Mikroelektronika\mikroC PRO for 8051\defs\
 Path1=G:\icei\c8051\calculadora_mikroC\
-Path2=C:\Archivos de programa\Mikroelektronika\mikroC PRO for 8051\defs\
+Path2=C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for 8051\defs\
 Path3=C:\Archivos de programa\Mikroelektronika\mikroC PRO for 8051\Uses\ATMEL\
 Path4=C:\Users\Public\Documents\Mikroelektronika\mikroC PRO for 8051\Uses\ATMEL\
 [HEADER_PATH]
@@ -69,9 +69,10 @@ File20=Sprintf
 File21=Sprinti
 File22=Sprintl
 File23=T6963C
-File24=Time
-File25=Trigonometry
-File26=UART
+File24=Trigonometry
+File25=UART
+File26=Time
 [EXPANDED NODES]
 Node1=Sources
-Count=1
+Node2=Output Files
+Count=2

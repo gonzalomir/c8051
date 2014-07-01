@@ -69,7 +69,6 @@ c_t2_bit
 ceil
 character8x7
 cmd_status
-cnt
 compare_double
 cos
 cose3
@@ -271,7 +270,8 @@ modf
 mul_16x16
 mul_32x32
 mul_32x32_fp
-oldstate
+num
+operacion
 ov
 ov_bit
 ow_read
@@ -384,6 +384,7 @@ rclk
 rclk_bit
 ren
 ren_bit
+res
 ri
 ri_bit
 rs0
