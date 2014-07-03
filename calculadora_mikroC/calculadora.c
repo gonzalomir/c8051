@@ -63,16 +63,13 @@ void main() {
 
     if(kp==21){
        switch(operacion[0]){
-          case 43:
-             res=res+num;
-          break;
-          case 45:
-             res=res-num;
-          break;
+          case 43:  res=res+num; break;
+          case 45:  res=res-num; break;
+          case 120: res=res*num; break;
+          case 253: res=res/num; break;
        }
-       IntToStr(res, txt);
        Lcd_Cmd(_LCD_CLEAR);
-       Lcd_Out(2, 10, txt);
+       num=res;
     }
 
      if(kp<10){

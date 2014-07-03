@@ -26,3 +26,5 @@ main
 		WordToStr
 			Div_16x16_U
 	Mul_16x16
+	Div_16x16_S
+		Div_16x16_U

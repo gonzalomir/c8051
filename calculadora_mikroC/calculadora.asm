@@ -169,7 +169,7 @@ L_main7:
 	MOV A, _kp+0
 	SUBB A, #14
 	JNC L_main26
-L__main33:
+L__main35:
 ;calculadora.c,56 :: 		Lcd_Cmd(_LCD_CLEAR);
 	MOV FARG_Lcd_Cmd_out_char+0, #1
 	LCALL _Lcd_Cmd+0
@@ -199,23 +199,21 @@ L_main26:
 ;calculadora.c,64 :: 		if(kp==21){
 	MOV A, _kp+0
 	XRL A, #21
-	JNZ L_main27
+	JZ #3
+	LJMP L_main27
 ;calculadora.c,65 :: 		switch(operacion[0]){
 	SJMP L_main28
-;calculadora.c,66 :: 		case 43:
+;calculadora.c,66 :: 		case 43:  res=res+num; break;
 L_main30:
-;calculadora.c,67 :: 		res=res+num;
 	MOV A, _res+0
 	ADD A, _num+0
 	MOV _res+0, A
 	MOV A, _res+1
 	ADDC A, _num+1
 	MOV _res+1, A
-;calculadora.c,68 :: 		break;
 	SJMP L_main29
-;calculadora.c,69 :: 		case 45:
+;calculadora.c,67 :: 		case 45:  res=res-num; break;
 L_main31:
-;calculadora.c,70 :: 		res=res-num;
 	CLR C
 	MOV A, _res+0
 	SUBB A, _num+0
@@ -223,9 +221,28 @@ L_main31:
 	MOV A, _res+1
 	SUBB A, _num+1
 	MOV _res+1, A
-;calculadora.c,71 :: 		break;
 	SJMP L_main29
-;calculadora.c,72 :: 		}
+;calculadora.c,68 :: 		case 120: res=res*num; break;
+L_main32:
+	MOV R0, _res+0
+	MOV R1, _res+1
+	MOV R4, _num+0
+	MOV R5, _num+1
+	LCALL _Mul_16x16+0
+	MOV _res+0, 0
+	MOV _res+1, 1
+	SJMP L_main29
+;calculadora.c,69 :: 		case 253: res=res/num; break;
+L_main33:
+	MOV R4, _num+0
+	MOV R5, _num+1
+	MOV R0, _res+0
+	MOV R1, _res+1
+	LCALL _Div_16x16_S+0
+	MOV _res+0, 0
+	MOV _res+1, 1
+	SJMP L_main29
+;calculadora.c,70 :: 		}
 L_main28:
 	MOV A, _operacion+0
 	XRL A, #43
@@ -233,28 +250,27 @@ L_main28:
 	MOV A, _operacion+0
 	XRL A, #45
 	JZ L_main31
+	MOV A, _operacion+0
+	XRL A, #120
+	JZ L_main32
+	MOV A, _operacion+0
+	XRL A, #253
+	JZ L_main33
 L_main29:
-;calculadora.c,73 :: 		IntToStr(res, txt);
-	MOV FARG_IntToStr_input+0, _res+0
-	MOV FARG_IntToStr_input+1, _res+1
-	MOV FARG_IntToStr_output+0, #_txt+0
-	LCALL _IntToStr+0
-;calculadora.c,74 :: 		Lcd_Cmd(_LCD_CLEAR);
+;calculadora.c,71 :: 		Lcd_Cmd(_LCD_CLEAR);
 	MOV FARG_Lcd_Cmd_out_char+0, #1
 	LCALL _Lcd_Cmd+0
-;calculadora.c,75 :: 		Lcd_Out(2, 10, txt);
-	MOV FARG_LCD_Out_row+0, #2
-	MOV FARG_LCD_Out_column+0, #10
-	MOV FARG_LCD_Out_text+0, #_txt+0
-	LCALL _LCD_Out+0
-;calculadora.c,76 :: 		}
+;calculadora.c,72 :: 		num=res;
+	MOV _num+0, _res+0
+	MOV _num+1, _res+1
+;calculadora.c,73 :: 		}
 L_main27:
-;calculadora.c,78 :: 		if(kp<10){
+;calculadora.c,75 :: 		if(kp<10){
 	CLR C
 	MOV A, _kp+0
 	SUBB A, #10
-	JNC L_main32
-;calculadora.c,80 :: 		num=num*10+kp;
+	JNC L_main34
+;calculadora.c,77 :: 		num=num*10+kp;
 	MOV R0, _num+0
 	MOV R1, _num+1
 	MOV R4, #10
@@ -266,20 +282,20 @@ L_main27:
 	CLR A
 	ADDC A, R1
 	MOV _num+1, A
-;calculadora.c,81 :: 		}
-L_main32:
-;calculadora.c,83 :: 		IntToStr(num, txt);        // Transform counter value to string
+;calculadora.c,78 :: 		}
+L_main34:
+;calculadora.c,80 :: 		IntToStr(num, txt);        // Transform counter value to string
 	MOV FARG_IntToStr_input+0, _num+0
 	MOV FARG_IntToStr_input+1, _num+1
 	MOV FARG_IntToStr_output+0, #_txt+0
 	LCALL _IntToStr+0
-;calculadora.c,84 :: 		Lcd_Out(2, 10, txt);       // Display counter value on Lcd
+;calculadora.c,81 :: 		Lcd_Out(2, 10, txt);       // Display counter value on Lcd
 	MOV FARG_LCD_Out_row+0, #2
 	MOV FARG_LCD_Out_column+0, #10
 	MOV FARG_LCD_Out_text+0, #_txt+0
 	LCALL _LCD_Out+0
-;calculadora.c,85 :: 		} while (1);
+;calculadora.c,82 :: 		} while (1);
 	LJMP L_main0
-;calculadora.c,86 :: 		}
+;calculadora.c,83 :: 		}
 	SJMP #254
 ; end of _main
