@@ -7,25 +7,22 @@ sbit LCD_D6 at P2_4_bit;
 sbit LCD_D7 at P2_5_bit;
 //Fin conexiones modulo LCD
 
-unsigned long clk;
+unsigned long num=0;
 char cad[11];
 
-void Timer1InterruptHandler() iv IVT_ADDR_ET1{
+void Timer1InterruptHandler() org IVT_ADDR_ET1{
   EA_bit = 0;        // Deshabilita las Interrupciones globales
-
   TR1_bit = 0;       // Detener el Timer1
-  TH1 = 0xFF;        // Setear el Timer1 high byte
-  TL1 = 0x11;        // Setear el Timer1 low byte
+  TH1 = 0x00;        // Setear el Timer1 high byte
+  TL1 = 0x01;        // Setear el Timer1 low byte
 
-  P0 = ~P0;          // Toggle PORT0
+  num++;
 
   EA_bit = 1;        // Habilitar las Interrupciones globales
   TR1_bit = 1;       // Correr el Timer1
 }
 
 void main() {
-  P0  = 0;           // Inicializa PORT0
-
   TF1_bit = 0;       // Ensure that Timer1 interrupt flag is cleared
   ET1_bit = 1;       // Habilitar la interrupcion del Timer1
   EA_bit  = 1;       // Habilitar las Interrupciones globales
@@ -36,21 +33,19 @@ void main() {
   M01_bit   = 1;
 
   TR1_bit = 0;       // Apagar el Timer1
-  TH1 = 0xFF;        // Set Timer1 high byte
-  TL1 = 0xFF;        // Set Timer1 low byte
+  TH1 = 0x00;        // Set Timer1 high byte
+  TL1 = 0x01;        // Set Timer1 low byte
   TR1_bit = 1;       // Correr el Timer1
   
+  //Programa principal
   Lcd_Init();                //Iniciar el LCD
   Lcd_Cmd(_LCD_CLEAR);       //Limpiar la pantalla
   Lcd_Cmd(_LCD_CURSOR_OFF);  //Apagar el cursor
-  clk = Get_Fosc_kHz()*1000;
-  LongWordToStr(clk,cad);
-  Lcd_Out(1,4,cad);
-  clk=(clk/12);
-  LongWordToStr(clk,cad);
-  Lcd_Out(2,4,cad);
-
-  while(1){
-     
-  }
+  
+  do{
+     Lcd_Cmd(_LCD_CLEAR);
+     LongWordToStr(num,cad);
+     Lcd_Out(2,5,cad);
+     Delay_ms(500);
+  }while(1);
 }

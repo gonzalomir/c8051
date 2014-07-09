@@ -69,7 +69,6 @@ c_t2_bit
 cad
 ceil
 character8x7
-clk
 cmd_status
 compare_double
 cos
@@ -270,6 +269,7 @@ modf
 mul_16x16
 mul_32x32
 mul_32x32_fp
+num
 ov
 ov_bit
 ow_read

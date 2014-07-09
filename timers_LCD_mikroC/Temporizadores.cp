@@ -8,25 +8,22 @@ sbit LCD_D6 at P2_4_bit;
 sbit LCD_D7 at P2_5_bit;
 
 
-unsigned long clk;
+unsigned long num=0;
 char cad[11];
 
-void Timer1InterruptHandler() iv IVT_ADDR_ET1{
+void Timer1InterruptHandler() org IVT_ADDR_ET1{
  EA_bit = 0;
-
  TR1_bit = 0;
- TH1 = 0xFF;
- TL1 = 0x11;
+ TH1 = 0x00;
+ TL1 = 0x01;
 
- P0 = ~P0;
+ num++;
 
  EA_bit = 1;
  TR1_bit = 1;
 }
 
 void main() {
- P0 = 0;
-
  TF1_bit = 0;
  ET1_bit = 1;
  EA_bit = 1;
@@ -37,21 +34,19 @@ void main() {
  M01_bit = 1;
 
  TR1_bit = 0;
- TH1 = 0xFF;
- TL1 = 0xFF;
+ TH1 = 0x00;
+ TL1 = 0x01;
  TR1_bit = 1;
+
 
  Lcd_Init();
  Lcd_Cmd(_LCD_CLEAR);
  Lcd_Cmd(_LCD_CURSOR_OFF);
- clk = Get_Fosc_kHz()*1000;
- LongWordToStr(clk,cad);
- Lcd_Out(1,4,cad);
- clk=(clk/12);
- LongWordToStr(clk,cad);
- Lcd_Out(2,4,cad);
 
- while(1){
-
- }
+ do{
+ Lcd_Cmd(_LCD_CLEAR);
+ LongWordToStr(num,cad);
+ Lcd_Out(2,5,cad);
+ Delay_ms(500);
+ }while(1);
 }

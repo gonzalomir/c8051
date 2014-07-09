@@ -1,4 +1,5 @@
 main
+	__CC2D
 	Lcd_Init
 		Delay_5500us
 		Delay_1us
@@ -6,8 +7,6 @@ main
 		Delay_1us
 		Delay_5500us
 		Delay_50us
-	Get_Fosc_kHz
-	Mul_32x32
 	LongWordToStr
 		Div_32x32_U
 	LCD_Out
@@ -20,5 +19,4 @@ main
 				Delay_1us
 				Delay_5500us
 				Delay_50us
-	Div_32x32_U
 Timer1InterruptHandler
