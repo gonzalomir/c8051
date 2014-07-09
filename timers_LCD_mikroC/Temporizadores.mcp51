@@ -22,7 +22,8 @@ Count=0
 Count=0
 ActiveImageIndex=-1
 [OPENED_FILES]
-Count=0
+Count=1
+File0=Temporizadores.c
 [EEPROM]
 Count=0
 [ACTIVE_COMMENTS_FILES]
@@ -32,8 +33,8 @@ Count=0
 [SEARCH_PATH]
 Count=3
 Path0=C:\Archivos de programa\Mikroelektronika\mikroC PRO for 8051\defs\
-Path1=C:\Archivos de programa\Mikroelektronika\mikroC PRO for 8051\Uses\ATMEL\
-Path2=G:\icei\c8051\timers_LCD_mikroC\
+Path1=G:\icei\c8051\timers_LCD_mikroC\
+Path2=C:\Archivos de programa\Mikroelektronika\mikroC PRO for 8051\Uses\ATMEL\
 [HEADER_PATH]
 Count=0
 [HEADERS]

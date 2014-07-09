@@ -11,34 +11,34 @@ unsigned long clk;
 char cad[11];
 
 void Timer1InterruptHandler() iv IVT_ADDR_ET1{
-  EA_bit = 0;        // Limpiar bit de Interrupciones globales
+  EA_bit = 0;        // Deshabilita las Interrupciones globales
 
-  TR1_bit = 0;       // Stop Timer1
-  TH1 = 0x00;        // Set Timer1 high byte
-  TL1 = 0x01;        // Set Timer1 low byte
+  TR1_bit = 0;       // Detener el Timer1
+  TH1 = 0xFF;        // Setear el Timer1 high byte
+  TL1 = 0x11;        // Setear el Timer1 low byte
 
   P0 = ~P0;          // Toggle PORT0
 
-  EA_bit = 1;        // Set global interrupt enable flag
-  TR1_bit = 1;       // Run Timer1
+  EA_bit = 1;        // Habilitar las Interrupciones globales
+  TR1_bit = 1;       // Correr el Timer1
 }
 
 void main() {
-  P0  = 0;           // Initialize PORT0
+  P0  = 0;           // Inicializa PORT0
 
   TF1_bit = 0;       // Ensure that Timer1 interrupt flag is cleared
-  ET1_bit = 1;       // Enable Timer1 interrupt
-  EA_bit  = 1;       // Set global interrupt enable
+  ET1_bit = 1;       // Habilitar la interrupcion del Timer1
+  EA_bit  = 1;       // Habilitar las Interrupciones globales
 
-  GATE1_bit = 0;     // Clear this flag to enable Timer1 whenever TR1 bit is set.
-  C_T1_bit  = 0;     // Set Timer operation: Timer1 counts the divided-down systam clock.
+  GATE1_bit = 0;     // Poner a cero el bit GATE del Timer1
+  C_T1_bit  = 0;     // Configura como contador o temporizador el Timer1
   M11_bit   = 0;     // M11_M01 = 01    =>   Mode 1(16-bit Timer/Counter)
   M01_bit   = 1;
 
-  TR1_bit = 0;       // Turn off Timer1
-  TH1 = 0x00;        // Set Timer1 high byte
-  TL1 = 0x01;        // Set Timer1 low byte
-  TR1_bit = 1;       // Run Timer1
+  TR1_bit = 0;       // Apagar el Timer1
+  TH1 = 0xFF;        // Set Timer1 high byte
+  TL1 = 0xFF;        // Set Timer1 low byte
+  TR1_bit = 1;       // Correr el Timer1
   
   Lcd_Init();                //Iniciar el LCD
   Lcd_Cmd(_LCD_CLEAR);       //Limpiar la pantalla
@@ -54,4 +54,3 @@ void main() {
      
   }
 }
-

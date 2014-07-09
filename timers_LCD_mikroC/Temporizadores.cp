@@ -15,8 +15,8 @@ void Timer1InterruptHandler() iv IVT_ADDR_ET1{
  EA_bit = 0;
 
  TR1_bit = 0;
- TH1 = 0x00;
- TL1 = 0x01;
+ TH1 = 0xFF;
+ TL1 = 0x11;
 
  P0 = ~P0;
 
@@ -31,14 +31,14 @@ void main() {
  ET1_bit = 1;
  EA_bit = 1;
 
- GATE1_bit = 1;
+ GATE1_bit = 0;
  C_T1_bit = 0;
  M11_bit = 0;
  M01_bit = 1;
 
  TR1_bit = 0;
- TH1 = 0x00;
- TL1 = 0x01;
+ TH1 = 0xFF;
+ TL1 = 0xFF;
  TR1_bit = 1;
 
  Lcd_Init();

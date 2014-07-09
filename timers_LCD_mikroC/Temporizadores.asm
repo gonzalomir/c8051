@@ -6,19 +6,19 @@ _Timer1InterruptHandler:
 	PUSH 130
 	PUSH 131
 ;Temporizadores.c,13 :: 		void Timer1InterruptHandler() iv IVT_ADDR_ET1{
-;Temporizadores.c,14 :: 		EA_bit = 0;        // Limpiar bit de Interrupciones globales
+;Temporizadores.c,14 :: 		EA_bit = 0;        // Deshabilita las Interrupciones globales
 	CLR EA_bit+0
-;Temporizadores.c,16 :: 		TR1_bit = 0;       // Stop Timer1
+;Temporizadores.c,16 :: 		TR1_bit = 0;       // Detener el Timer1
 	CLR TR1_bit+0
-;Temporizadores.c,17 :: 		TH1 = 0x00;        // Set Timer1 high byte
-	MOV TH1+0, #0
-;Temporizadores.c,18 :: 		TL1 = 0x01;        // Set Timer1 low byte
-	MOV TL1+0, #1
+;Temporizadores.c,17 :: 		TH1 = 0xFF;        // Setear el Timer1 high byte
+	MOV TH1+0, #255
+;Temporizadores.c,18 :: 		TL1 = 0x11;        // Setear el Timer1 low byte
+	MOV TL1+0, #17
 ;Temporizadores.c,20 :: 		P0 = ~P0;          // Toggle PORT0
 	XRL P0+0, #255
-;Temporizadores.c,22 :: 		EA_bit = 1;        // Set global interrupt enable flag
+;Temporizadores.c,22 :: 		EA_bit = 1;        // Habilitar las Interrupciones globales
 	SETB EA_bit+0
-;Temporizadores.c,23 :: 		TR1_bit = 1;       // Run Timer1
+;Temporizadores.c,23 :: 		TR1_bit = 1;       // Correr el Timer1
 	SETB TR1_bit+0
 ;Temporizadores.c,24 :: 		}
 	POP 131
@@ -32,20 +32,20 @@ _Timer1InterruptHandler:
 _main:
 	MOV SP+0, #128
 ;Temporizadores.c,26 :: 		void main() {
-;Temporizadores.c,27 :: 		P0  = 0;           // Initialize PORT0
+;Temporizadores.c,27 :: 		P0  = 0;           // Inicializa PORT0
 	MOV P0+0, #0
 ;Temporizadores.c,29 :: 		TF1_bit = 0;       // Ensure that Timer1 interrupt flag is cleared
 	CLR TF1_bit+0
-;Temporizadores.c,30 :: 		ET1_bit = 1;       // Enable Timer1 interrupt
+;Temporizadores.c,30 :: 		ET1_bit = 1;       // Habilitar la interrupcion del Timer1
 	SETB ET1_bit+0
-;Temporizadores.c,31 :: 		EA_bit  = 1;       // Set global interrupt enable
+;Temporizadores.c,31 :: 		EA_bit  = 1;       // Habilitar las Interrupciones globales
 	SETB EA_bit+0
-;Temporizadores.c,33 :: 		GATE1_bit = 1;     // Clear this flag to enable Timer1 whenever TR1 bit is set.
-	SETB C
+;Temporizadores.c,33 :: 		GATE1_bit = 0;     // Poner a cero el bit GATE del Timer1
+	CLR C
 	MOV A, GATE1_bit+0
 	MOV #224, C
 	MOV GATE1_bit+0, A
-;Temporizadores.c,34 :: 		C_T1_bit  = 0;     // Set Timer operation: Timer1 counts the divided-down systam clock.
+;Temporizadores.c,34 :: 		C_T1_bit  = 0;     // Configura como contador o temporizador el Timer1
 	CLR C
 	MOV A, C_T1_bit+0
 	MOV #224, C
@@ -60,13 +60,13 @@ _main:
 	MOV A, M01_bit+0
 	MOV #224, C
 	MOV M01_bit+0, A
-;Temporizadores.c,38 :: 		TR1_bit = 0;       // Turn off Timer1
+;Temporizadores.c,38 :: 		TR1_bit = 0;       // Apagar el Timer1
 	CLR TR1_bit+0
-;Temporizadores.c,39 :: 		TH1 = 0x00;        // Set Timer1 high byte
-	MOV TH1+0, #0
-;Temporizadores.c,40 :: 		TL1 = 0x01;        // Set Timer1 low byte
-	MOV TL1+0, #1
-;Temporizadores.c,41 :: 		TR1_bit = 1;       // Run Timer1
+;Temporizadores.c,39 :: 		TH1 = 0xFF;        // Set Timer1 high byte
+	MOV TH1+0, #255
+;Temporizadores.c,40 :: 		TL1 = 0xFF;        // Set Timer1 low byte
+	MOV TL1+0, #255
+;Temporizadores.c,41 :: 		TR1_bit = 1;       // Correr el Timer1
 	SETB TR1_bit+0
 ;Temporizadores.c,43 :: 		Lcd_Init();                //Iniciar el LCD
 	LCALL _Lcd_Init+0
